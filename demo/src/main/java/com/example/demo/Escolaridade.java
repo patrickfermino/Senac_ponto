@@ -1,7 +1,6 @@
 package com.example.demo;
 
 public enum Escolaridade {
-    private  String Ensino Medio Completo,
-    Ensino Medio Inco..
+    ENSINO_MEDIO_COMPLETO, ENSINO_MEDIO_INCOMPLETO, GRADUACAO_COMPLETA, GRADUACAO_INCOMPLETA
 
 }
