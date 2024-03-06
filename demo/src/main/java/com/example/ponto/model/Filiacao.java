@@ -1,19 +1,11 @@
 package com.example.ponto.model;
 
-public class Filiacao {
-    private String telefone;
+public class Filiacao extends EntityId {
+
     private String nomeMae;
     private String nomePai;
     private String telPai;
     private String telMae;
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 
     public String getNomeMae() {
         return nomeMae;
@@ -50,10 +42,9 @@ public class Filiacao {
     @Override
     public String toString() {
         return "Filiacao{" +
-                "telefone='" + telefone + '\'' +
-                ", mae='" + nomeMae + '\'' +
-                ", pai='" + nomePai + '\'' +
-                ", telpai='" + telPai + '\'' +
+                "nomeMae='" + nomeMae + '\'' +
+                ", nomePai='" + nomePai + '\'' +
+                ", telPai='" + telPai + '\'' +
                 ", telMae='" + telMae + '\'' +
                 '}';
     }

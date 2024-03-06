@@ -2,25 +2,25 @@ package com.example.ponto.model;
 
 import java.time.LocalDate;
 
-public class Dependentes {
-    private String nome;
-    private Escolaridade Escolaridade;
+public class Dependentes extends EntityId {
+    private String nomeDependentes;
+    private Escolaridade escolaridade;
     private LocalDate dataNascimento;
 
-    public String getNome() {
-        return nome;
+    public String getNomeDependentes() {
+        return nomeDependentes;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeDependentes(String nomeDependentes) {
+        this.nomeDependentes = nomeDependentes;
     }
 
-    public com.senac.Ponto.model.Escolaridade getEscolaridade() {
-        return Escolaridade;
+    public Escolaridade getEscolaridade() {
+        return escolaridade;
     }
 
-    public void setEscolaridade(com.senac.Ponto.model.Escolaridade escolaridade) {
-        Escolaridade = escolaridade;
+    public void setEscolaridade(Escolaridade escolaridade) {
+        this.escolaridade = escolaridade;
     }
 
     public LocalDate getDataNascimento() {
@@ -34,8 +34,8 @@ public class Dependentes {
     @Override
     public String toString() {
         return "Dependentes{" +
-                "nome='" + nome + '\'' +
-                ", Escolaridade=" + Escolaridade +
+                "nomeDependentes='" + nomeDependentes + '\'' +
+                ", escolaridade=" + escolaridade +
                 ", dataNascimento=" + dataNascimento +
                 '}';
     }

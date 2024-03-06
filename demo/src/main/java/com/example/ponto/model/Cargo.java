@@ -1,9 +1,9 @@
 package com.example.ponto.model;
 
-public class Cargo {
+public class Cargo extends EntityId {
     private String descricao;
     private String nivel;
-    private Boolean condicionado;
+    private Boolean comissionado;
 
     public String getDescricao() {
         return descricao;
@@ -21,12 +21,12 @@ public class Cargo {
         this.nivel = nivel;
     }
 
-    public Boolean getCondicionado() {
-        return condicionado;
+    public Boolean getComissionado() {
+        return comissionado;
     }
 
-    public void setCondicionado(Boolean condicionado) {
-        this.condicionado = condicionado;
+    public void setComissionado(Boolean comissionado) {
+        this.comissionado = comissionado;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Cargo {
         return "Cargo{" +
                 "descricao='" + descricao + '\'' +
                 ", nivel='" + nivel + '\'' +
-                ", condicionado=" + condicionado +
+                ", comissionado=" + comissionado +
                 '}';
     }
 }

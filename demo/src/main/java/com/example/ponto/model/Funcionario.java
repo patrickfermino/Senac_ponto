@@ -1,9 +1,12 @@
 package com.example.ponto.model;
 
+import jakarta.persistence.Entity;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Funcionario {
+@Entity
+public class Funcionario extends EntityId{
   private String nome;
   private String cpf;
   private String rg;
@@ -34,6 +37,42 @@ public class Funcionario {
   private Integer horaExtra;
   private LocalTime horaEntrada;
   private LocalTime horaSaida;
+  private String endereco;
+  private String certificacao;
+  private String genero;
+  private String escolaridade;
+
+  public String getGenero() {
+    return genero;
+  }
+
+  public void setGenero(String genero) {
+    this.genero = genero;
+  }
+
+  public String getEscolaridade() {
+    return escolaridade;
+  }
+
+  public void setEscolaridade(String escolaridade) {
+    this.escolaridade = escolaridade;
+  }
+
+  public String getCertificacao() {
+    return certificacao;
+  }
+
+  public void setCertificacao(String certificacao) {
+    this.certificacao = certificacao;
+  }
+
+  public String getEndereco() {
+    return endereco;
+  }
+
+  public void setEndereco(String endereco) {
+    this.endereco = endereco;
+  }
 
   public String getNome() {
     return nome;
@@ -293,7 +332,7 @@ public class Funcionario {
             ", registroProfissional='" + registroProfissional + '\'' +
             ", sindicato='" + sindicato + '\'' +
             ", setor='" + setor + '\'' +
-            ", CNH='" + cnh + '\'' +
+            ", cnh='" + cnh + '\'' +
             ", dataAdmissao=" + dataAdmissao +
             ", tipoRh=" + tipoRh +
             ", cargo=" + cargo +
@@ -308,6 +347,10 @@ public class Funcionario {
             ", horaExtra=" + horaExtra +
             ", horaEntrada=" + horaEntrada +
             ", horaSaida=" + horaSaida +
+            ", endereco='" + endereco + '\'' +
+            ", certificacao='" + certificacao + '\'' +
+            ", genero='" + genero + '\'' +
+            ", escolaridade='" + escolaridade + '\'' +
             '}';
   }
 }
