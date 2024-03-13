@@ -1,5 +1,7 @@
 package com.example.ponto.model;
 
+import com.example.ponto.model.enums.Escolaridade;
+
 import java.time.LocalDate;
 
 public class Dependentes extends EntityId {

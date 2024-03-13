@@ -1,5 +1,8 @@
 package com.example.ponto.model;
 
+import com.example.ponto.model.enums.EstadoCivil;
+import com.example.ponto.model.enums.ModalidadeContratual;
+import com.example.ponto.model.enums.TipoRh;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
