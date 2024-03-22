@@ -1,2 +1,2 @@
 # Senac_ponto
-uma parte de um sistema de Ponto Eletrônico da empresa 
+Sistema de Ponto Eletrônico, projeto de sala de aula
