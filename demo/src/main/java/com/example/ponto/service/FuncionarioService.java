@@ -1,6 +1,7 @@
 package com.example.ponto.service;
 
 import com.example.ponto.model.Funcionario;
+import com.example.ponto.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,8 @@ import java.util.Optional;
 @Service
 public class FuncionarioService {
 
-    //@Autowired
-    //private FuncionarioRepository repository;
+    @Autowired
+    private FuncionarioRepository repository;
 
     public Funcionario salvar (Funcionario entity){
         return repository.save(entity);
