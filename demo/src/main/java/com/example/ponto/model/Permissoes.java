@@ -30,3 +30,4 @@ private NivelPermissao nivelPermissao;
                 '}';
     }
 }
+// falta a validação das horas trabalhadas
