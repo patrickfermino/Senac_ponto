@@ -1,8 +1,18 @@
 package com.example.ponto.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+import java.time.Duration;
 import java.time.LocalTime;
 
 public class HorarioTrabalho {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
     private Funcionario funcionario;
     private LocalTime horaPadraoEntrada;
     private LocalTime horaPadraoSaida;

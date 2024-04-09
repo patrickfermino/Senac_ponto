@@ -1,6 +1,7 @@
 package com.example.ponto.resource;
 
 import com.example.ponto.model.Funcionario;
+import com.example.ponto.model.HorarioTrabalho;
 import com.example.ponto.repository.FuncionarioRepository;
 import com.example.ponto.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;

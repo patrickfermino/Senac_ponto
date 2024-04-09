@@ -3,13 +3,19 @@ package com.example.ponto.model;
 import com.example.ponto.model.enums.EstadoCivil;
 import com.example.ponto.model.enums.ModalidadeContratual;
 import com.example.ponto.model.enums.TipoRh;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+
 @Entity
+
 public class Funcionario extends EntityId{
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
   private String nome;
   private String cpf;
   private String rg;

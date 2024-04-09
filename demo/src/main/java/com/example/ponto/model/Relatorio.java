@@ -1,6 +1,13 @@
 package com.example.ponto.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Relatorio {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "funcionario")
     private HorarioTrabalho horarioTrabalho;
     private RegistroPonto registroPonto;
     private Funcionario funcionario;

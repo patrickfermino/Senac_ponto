@@ -1,6 +1,6 @@
 Peço desculpas pela omissão. Aqui está o código completo com os métodos setters incluídos:
 
-        ```java
+
         package com.example.ponto.service;
 
 import com.example.ponto.model.HorarioTrabalho;
