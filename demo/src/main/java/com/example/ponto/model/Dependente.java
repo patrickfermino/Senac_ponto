@@ -4,7 +4,7 @@ import com.example.ponto.model.enums.Escolaridade;
 
 import java.time.LocalDate;
 
-public class Dependentes extends EntityId {
+public class Dependente extends EntityId {
     private String nomeDependentes;
     private Escolaridade escolaridade;
     private LocalDate dataNascimento;

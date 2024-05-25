@@ -1,16 +1,15 @@
 package com.example.ponto.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import com.example.ponto.model.Funcionario;
 
-public class HorarioTrabalho {
+public class HorarioTrabalho  {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne
     private Funcionario funcionario;
@@ -19,27 +18,6 @@ public class HorarioTrabalho {
     private LocalTime horaPadraoIntervalo;
     private String diasTrabalhados;
 
-    //Regra de negocio calculo de horas com limite de horas por dia
-    public long calcularHorasTrabalhadas() {
-        // Verifica se os horários de entrada e saída foram definidos
-        if (horaPadraoEntrada == null || horaPadraoSaida == null) {
-            return 0; // Se algum dos horários não estiver definido, retorna 0 horas trabalhadas
-        }
-        // Calcula a duração entre a hora de entrada e a hora de saída
-        Duration duracaoTrabalho = Duration.between(horaPadraoEntrada, horaPadraoSaida);
-
-        // Subtrai a duração do intervalo de descanso (1 hora e meia) da duração total de trabalho
-        duracaoTrabalho = duracaoTrabalho.minus(Duration.ofMinutes(90));
-
-        // Verifica se a duração total de trabalho é menor ou igual ao limite de horas por dia (8 horas)
-        if (duracaoTrabalho.toHours() <= 8) {
-            // Se for, retorna a duração total de trabalho em horas
-            return duracaoTrabalho.toHours();
-        } else {
-            // Caso contrário, retorna o valor excedente
-            return duracaoTrabalho.toHours() - 8;
-        }
-    }
 
     public Funcionario getFuncionario() {
         return funcionario;
@@ -47,6 +25,13 @@ public class HorarioTrabalho {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalTime getHoraPadraoEntrada() {

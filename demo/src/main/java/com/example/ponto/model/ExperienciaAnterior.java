@@ -2,7 +2,7 @@ package com.example.ponto.model;
 
 import java.time.LocalDate;
 
-public class ExpAnterior extends EntityId {
+public class ExperienciaAnterior extends EntityId {
    private String descricao;
    private String cargo;
    private LocalDate periodoInicial;

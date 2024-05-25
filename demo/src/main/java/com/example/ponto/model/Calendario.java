@@ -1,9 +1,6 @@
 package com.example.ponto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,8 +10,13 @@ public class Calendario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Data", nullable = false)
     private LocalDate data;
+
+    @Column(name = "Feriado", nullable = false)
     private boolean feriado;
+
+    @Column(name = "Final_De_Semana", nullable = false)
     private boolean finalDeSemana;
 
     public Long getId() {

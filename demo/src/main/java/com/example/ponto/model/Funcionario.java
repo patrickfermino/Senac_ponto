@@ -15,40 +15,109 @@ import java.time.LocalTime;
 public class Funcionario extends EntityId{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "Id_Funcionario", nullable = false)
   private Long id;
+
+  @Column(name = "Nome", nullable = false)
   private String nome;
+
+  @Column(name = "CPF", nullable = false)
   private String cpf;
+
+  @Column(name = "RG", nullable = false)
   private String rg;
+
+  @Column(name = "CTPS", nullable = false)
   private String ctps;
+
+  @Column(name = "Salario", nullable = false)
   private Double salario;
+
+  @Column(name = "Carga_Horaria", nullable = false)
   private Integer cargaHoraria;
+
+  @Column(name = "Modalidade_Contratual", nullable = false)
   private ModalidadeContratual modalidadeContratual;
+
+  @Column(name = "Estado_Civil", nullable = false)
   private EstadoCivil estadoCivil;
+
+  @Column(name = "Titulo_Eleitor", nullable = false)
   private String tituloEleitor;
+
+  @Column(name = "Carteira_Reservista", nullable = false)
   private String carteiraReservista;
+
+  @Column(name = "Data_Nascimento", nullable = false)
   private LocalDate dataNascimento;
+
+  @Column(name = "PIS", nullable = false)
   private String pis;
+
+  @Column(name = "Registro_Profissional", nullable = false)
   private String registroProfissional;
+
+  @Column(name = "Sindicato", nullable = false)
   private String sindicato;
+
+  @Column(name = "Setor", nullable = false)
   private String setor;
+
+  @Column(name = "CNH", nullable = false)
   private String cnh;
+
+  @Column(name = "Data_Admissao", nullable = false)
   private LocalDate dataAdmissao;
+
+  @Column(name = "Tipo_Rh", nullable = false)
   private TipoRh tipoRh;
+
+  @Column(name = "Cargo", nullable = false)
   private Cargo cargo;
-  private Dependentes dependentes;
+
+  @Column(name = "Dependentes", nullable = false)
+  private Dependente dependentes;
+
+  @Column(name = "Raca_Cor", nullable = false)
   private String racaCor;
+
+  @Column(name = "Religiao", nullable = false)
   private String religiao;
+
+  @Column(name = "Doador_Sangue", nullable = false)
   private Boolean doadorSangue;
+
+  @Column(name = "Nacionalidade", nullable = false)
   private String nacionalidade;
+
+  @Column(name = "RedeSocial", nullable = false)
   private String redeSocial;
+
+  @Column(name = "Area_Atuacao", nullable = false)
   private String areaAtuacao;
+
+  @Column(name = "Idiomas", nullable = false)
   private String idiomas;
+
+  @Column(name = "Hora_Extra", nullable = false)
   private Integer horaExtra;
+
+  @Column(name = "Hora_Entrada", nullable = false)
   private LocalTime horaEntrada;
+
+  @Column(name = "Hora_Saida", nullable = false)
   private LocalTime horaSaida;
+
+  @Column(name = "Endereco", nullable = false)
   private String endereco;
+
+  @Column(name = "Certificado", nullable = false)
   private String certificacao;
+
+  @Column(name = "Genero", nullable = false)
   private String genero;
+
+  @Column(name = "Escolaridade", nullable = false)
   private String escolaridade;
 
   public String getGenero() {
@@ -121,14 +190,6 @@ public class Funcionario extends EntityId{
 
   public void setSalario(Double salario) {
     this.salario = salario;
-  }
-
-  public Integer getCargaHoraria() {
-    return cargaHoraria;
-  }
-
-  public void setCargaHoraria(Integer cargaHoraria) {
-    this.cargaHoraria = cargaHoraria;
   }
 
   public ModalidadeContratual getModalidadeContratual() {
@@ -219,14 +280,6 @@ public class Funcionario extends EntityId{
     this.dataAdmissao = dataAdmissao;
   }
 
-  public TipoRh getTipoRh() {
-    return tipoRh;
-  }
-
-  public void setTipoRh(TipoRh tipoRh) {
-    this.tipoRh = tipoRh;
-  }
-
   public Cargo getCargo() {
     return cargo;
   }
@@ -235,11 +288,11 @@ public class Funcionario extends EntityId{
     this.cargo = cargo;
   }
 
-  public Dependentes getDependentes() {
+  public Dependente getDependentes() {
     return dependentes;
   }
 
-  public void setDependentes(Dependentes dependentes) {
+  public void setDependenyt(Dependente dependentes) {
     this.dependentes = dependentes;
   }
 

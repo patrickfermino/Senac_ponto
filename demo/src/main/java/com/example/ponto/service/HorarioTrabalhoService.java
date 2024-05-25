@@ -1,12 +1,10 @@
-Peço desculpas pela omissão. Aqui está o código completo com os métodos setters incluídos:
-
-
-        package com.example.ponto.service;
+package com.example.ponto.service;
 
 import com.example.ponto.model.HorarioTrabalho;
 import com.example.ponto.repository.HorarioTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.List;
@@ -15,8 +13,12 @@ import java.util.Optional;
 @Service
 public class HorarioTrabalhoService {
 
+    private final HorarioTrabalhoRepository repository;
+
     @Autowired
-    private HorarioTrabalhoRepository repository;
+    public HorarioTrabalhoService(HorarioTrabalhoRepository repository) {
+        this.repository = repository;
+    }
 
     public HorarioTrabalho salvar(HorarioTrabalho entity) {
         return repository.save(entity);
@@ -26,8 +28,8 @@ public class HorarioTrabalhoService {
         return repository.findAll();
     }
 
-    public HorarioTrabalho buscaPorId(Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<HorarioTrabalho> buscaPorId(Long id) {
+        return repository.findById(id);
     }
     public long calcularHorasTrabalhadas(Long id) {
         HorarioTrabalho horarioTrabalho = repository.findById(id).orElse(null);
@@ -61,21 +63,23 @@ public class HorarioTrabalhoService {
         return 0; // Retorna 0 se não houver dados suficientes para calcular as horas trabalhadas
     }
 
+    @Transactional
     public HorarioTrabalho alterar(Long id, HorarioTrabalho alterado) {
-        Optional<HorarioTrabalho> encontrado = repository.findById(id);
-        if (encontrado.isPresent()) {
-            HorarioTrabalho horarioTrabalho = encontrado.get();
-            horarioTrabalho.setHoraPadraoEntrada(alterado.getHoraPadraoEntrada());
-            horarioTrabalho.setHoraPadraoSaida(alterado.getHoraPadraoSaida());
-            horarioTrabalho.setHoraPadraoIntervalo(alterado.getHoraPadraoIntervalo());
-            horarioTrabalho.setDiasTrabalhados(alterado.getDiasTrabalhados());
-            return repository.save(horarioTrabalho);
-        }
-        return null;
+        return repository.findById(id)
+                .map(horarioTrabalho -> {
+                    horarioTrabalho.setHoraPadraoEntrada(alterado.getHoraPadraoEntrada());
+                    horarioTrabalho.setHoraPadraoSaida(alterado.getHoraPadraoSaida());
+                    horarioTrabalho.setHoraPadraoIntervalo(alterado.getHoraPadraoIntervalo());
+                    horarioTrabalho.setDiasTrabalhados(alterado.getDiasTrabalhados());
+                    return repository.save(horarioTrabalho);
+                })
+                .orElseThrow(() -> new RuntimeException("Horário de trabalho não encontrado"));
     }
 
-    public void remover(Long id) {repository.deleteById(id);
+    public void remover(Long id) {
+        repository.deleteById(id);
     }
 }
+
 
 

@@ -1,6 +1,6 @@
 package com.example.ponto.model;
 
-public class DadosBancarios extends EntityId {
+public class DadosBancario extends EntityId {
     private  String banco;
     private String agencia;
     private String conta;
