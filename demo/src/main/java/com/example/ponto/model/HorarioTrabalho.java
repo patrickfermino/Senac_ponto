@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import com.example.ponto.model.Funcionario;
-
+@Entity
 public class HorarioTrabalho  {
 
     @Id
