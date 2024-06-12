@@ -3,7 +3,6 @@ package com.example.ponto.model;
 import jakarta.persistence.*;
 @Entity
 @Table(name="cargo")
-
 public class Cargo extends EntityId {
 
     @Column(name="descricao", nullable = false)
@@ -35,7 +34,7 @@ public class Cargo extends EntityId {
         return nivel;
     }
 
-    public void setNivel (String Nivel){
+    public void setNivel (String nivel){
         this.nivel = nivel;
     }
 
