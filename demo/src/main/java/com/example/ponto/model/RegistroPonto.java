@@ -1,54 +1,36 @@
 package com.example.ponto.model;
 
 import com.example.ponto.model.enums.TipoRegistro;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class RegistroPonto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
+    private Long id;
 
-    private Integer idRegistro;
-    private Funcionario funcionario;
-    private LocalDateTime horaEntrada;
-    private LocalDateTime horaSaida;
+    @Column(name = "Hora_Batida", nullable = false)
+    private LocalDateTime horaBatida;
+
+    @Column(name = "tipoRegistro", nullable = false)
     private TipoRegistro tipoRegistro;
 
-    public Integer getIdRegistro() {
-        return idRegistro;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRegistro(Integer idRegistro) {
-        this.idRegistro = idRegistro;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public LocalDateTime getHoraBatida() {
+        return horaBatida;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
-    public LocalDateTime getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(LocalDateTime horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    public LocalDateTime getHoraSaida() {
-        return horaSaida;
-    }
-
-    public void setHoraSaida(LocalDateTime horaSaida) {
-        this.horaSaida = horaSaida;
+    public void setHoraBatida(LocalDateTime horaBatida) {
+        this.horaBatida = horaBatida;
     }
 
     public TipoRegistro getTipoRegistro() {
@@ -62,10 +44,8 @@ public class RegistroPonto {
     @Override
     public String toString() {
         return "RegistroPonto{" +
-                "idRegistro=" + idRegistro +
-                ", funcionario=" + funcionario +
-                ", horaEntrada=" + horaEntrada +
-                ", horaSaida=" + horaSaida +
+                "id=" + id +
+                ", horaBatida=" + horaBatida +
                 ", tipoRegistro=" + tipoRegistro +
                 '}';
     }

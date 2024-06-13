@@ -9,23 +9,18 @@ import com.example.ponto.model.Funcionario;
 public class HorarioTrabalho  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Funcionario funcionario;
+
+    @Column(name = "horaPadraoEntrada", nullable = false)
     private LocalTime horaPadraoEntrada;
+    @Column(name = "horaPadraoSaida", nullable = false)
     private LocalTime horaPadraoSaida;
+    @Column(name = "horaPadraoIntervalo", nullable = false)
     private LocalTime horaPadraoIntervalo;
+    @Column(name = "diasTrabalhados", nullable = false)
     private String diasTrabalhados;
 
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
     public Long getId() {
         return id;
     }
@@ -69,7 +64,6 @@ public class HorarioTrabalho  {
     @Override
     public String toString() {
         return "HorarioTrabalho{" +
-                "funcionario=" + funcionario +
                 ", horaPadraoEntrada=" + horaPadraoEntrada +
                 ", horaPadraoSaida=" + horaPadraoSaida +
                 ", horaPadraoIntervalo=" + horaPadraoIntervalo +
