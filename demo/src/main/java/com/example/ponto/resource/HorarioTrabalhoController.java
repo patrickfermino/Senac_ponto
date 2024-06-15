@@ -1,6 +1,6 @@
 package com.example.ponto.resource;
 
-import com.example.ponto.model.HorarioTrabalho;
+import com.example.ponto.models.domain.HorarioTrabalho;
 import com.example.ponto.service.HorarioTrabalhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,6 @@
 package com.example.ponto.resource;
 
-import com.example.ponto.model.Funcionario;
-import com.example.ponto.repository.FuncionarioRepository;
+import com.example.ponto.models.Funcionario;
 import com.example.ponto.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/funcionarios")
 public class FuncionarioController {
+
     @Autowired
     private FuncionarioService service;
     @PostMapping

@@ -1,6 +1,6 @@
 package com.example.ponto.service;
 
-import com.example.ponto.model.Funcionario;
+import com.example.ponto.models.Funcionario;
 import com.example.ponto.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

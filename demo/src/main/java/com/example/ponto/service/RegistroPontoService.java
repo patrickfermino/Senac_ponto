@@ -1,8 +1,7 @@
 
 package com.example.ponto.service;
 
-import com.example.ponto.model.RegistroPonto;
-import com.example.ponto.repository.HorarioTrabalhoRepository;
+import com.example.ponto.models.domain.RegistroPonto;
 import com.example.ponto.repository.RegistroPontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
