@@ -1,6 +1,6 @@
 package com.example.ponto.service;
 
-import com.example.ponto.model.HorarioTrabalho;
+import com.example.ponto.models.domain.HorarioTrabalho;
 import com.example.ponto.repository.HorarioTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,9 @@ public class HorarioTrabalhoService {
     }
     public long calcularHorasTrabalhadas(Long id) {
         HorarioTrabalho horarioTrabalho = repository.findById(id).orElse(null);
-        if (horarioTrabalho != null && horarioTrabalho.getHoraPadraoEntrada() != null && horarioTrabalho.getHoraPadraoSaida() != null) {
+        if (horarioTrabalho != null && horarioTrabalho.getHoraEntrada() != null && horarioTrabalho.getHoraSaida() != null) {
             // Calcula a duração entre a hora de entrada e a hora de saída
-            Duration duracaoTrabalho = Duration.between(horarioTrabalho.getHoraPadraoEntrada(), horarioTrabalho.getHoraPadraoSaida());
+            Duration duracaoTrabalho = Duration.between(horarioTrabalho.getHoraEntrada(), horarioTrabalho.getHoraSaida());
 
             // Subtrai a duração do intervalo de descanso (1 hora e meia) da duração total de trabalho
             duracaoTrabalho = duracaoTrabalho.minus(Duration.ofMinutes(90));
@@ -67,9 +67,9 @@ public class HorarioTrabalhoService {
     public HorarioTrabalho alterar(Long id, HorarioTrabalho alterado) {
         return repository.findById(id)
                 .map(horarioTrabalho -> {
-                    horarioTrabalho.setHoraPadraoEntrada(alterado.getHoraPadraoEntrada());
-                    horarioTrabalho.setHoraPadraoSaida(alterado.getHoraPadraoSaida());
-                    horarioTrabalho.setHoraPadraoIntervalo(alterado.getHoraPadraoIntervalo());
+                    horarioTrabalho.setHoraEntrada(alterado.getHoraEntrada());
+                    horarioTrabalho.setHoraSaida(alterado.getHoraSaida());
+                    horarioTrabalho.setHoraIntervalo(alterado.getHoraIntervalo());
                     horarioTrabalho.setDiasTrabalhados(alterado.getDiasTrabalhados());
                     return repository.save(horarioTrabalho);
                 })

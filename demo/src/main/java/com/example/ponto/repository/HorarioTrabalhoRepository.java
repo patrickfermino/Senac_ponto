@@ -1,6 +1,6 @@
 package com.example.ponto.repository;
 
-import com.example.ponto.model.HorarioTrabalho;
+import com.example.ponto.models.domain.HorarioTrabalho;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
