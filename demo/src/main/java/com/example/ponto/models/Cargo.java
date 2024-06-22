@@ -1,22 +1,29 @@
 package com.example.ponto.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.*;
 
 @Entity
 public class Cargo extends EntityId {
 
-    @Column(name="descricao", nullable = false)
+    @Column
     private String descricao;
-    @Column(name="nivel", nullable = false)
+    @Column
     private String nivel;
-    @Column(name="comissionado", nullable = false)
+    @Column
     private Boolean comissionado;
+
+    public Cargo(String descricao, String nivel, Boolean comissionado) {
+        this.descricao = descricao;
+        this.nivel = nivel;
+        this.comissionado = comissionado;
+    }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao (String descricao){
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -24,7 +31,7 @@ public class Cargo extends EntityId {
         return nivel;
     }
 
-    public void setNivel (String nivel){
+    public void setNivel(String nivel) {
         this.nivel = nivel;
     }
 

@@ -17,10 +17,10 @@ public class FuncionarioService {
     public Funcionario salvar (Funcionario entity){
         return repository.save(entity);
     }
-    public List<Funcionario> buscaTodos(){
+    public List<Funcionario> buscarTodos(){
         return repository.findAll();
     }
-    public Funcionario buscaPorId(Long id) {
+    public Funcionario buscarPorId(Long id) {
         return repository.findById(id).orElse(null);
     }
     public Funcionario alterar(Long id, Funcionario alterado){
@@ -31,13 +31,8 @@ public class FuncionarioService {
             funcionario.setCpf(alterado.getCpf());
             funcionario.setRg(alterado.getRg());
             funcionario.setEndereco(alterado.getEndereco());
-            funcionario.setCtps(alterado.getCtps());
-            funcionario.setSalario(alterado.getSalario());
             funcionario.setTituloEleitor(alterado.getTituloEleitor());
             funcionario.setTituloEleitor(alterado.getTituloEleitor());
-            funcionario.setDataNascimento(alterado.getDataNascimento());
-            funcionario.setCarteiraReservista(alterado.getCarteiraReservista());
-            funcionario.setPis(alterado.getPis());
             funcionario.setRegistroProfissional(alterado.getRegistroProfissional());
             funcionario.setSindicato(alterado.getSindicato());
             funcionario.setSetor(alterado.getSetor());
@@ -47,15 +42,12 @@ public class FuncionarioService {
             funcionario.setRacaCor(alterado.getRacaCor());
             funcionario.setReligiao(alterado.getReligiao());
             funcionario.setDoadorSangue(alterado.getDoadorSangue());
-            funcionario.setCertificacao(alterado.getCertificacao());
             funcionario.setNacionalidade(alterado.getNacionalidade());
             funcionario.setRedeSocial(alterado.getRedeSocial());
             funcionario.setAreaAtuacao(alterado.getAreaAtuacao());
-            funcionario.setIdiomas(alterado.getIdiomas());
             funcionario.setHoraExtra(alterado.getHoraExtra());
             funcionario.setHoraEntrada(alterado.getHoraEntrada());
             funcionario.setHoraSaida(alterado.getHoraSaida());
-            funcionario.setEscolaridade(alterado.getEscolaridade());
             funcionario.setEstadoCivil(alterado.getEstadoCivil());
             funcionario.setGenero(alterado.getGenero());
             funcionario.setModalidadeContratual(alterado.getModalidadeContratual());

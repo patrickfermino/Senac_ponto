@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class RegistroPontoService {
-
 
     private final RegistroPontoRepository repository;
 
@@ -33,7 +33,7 @@ public class RegistroPontoService {
         if (encontrado.isPresent()){
             RegistroPonto registroPonto = encontrado.get();
             registroPonto.setTipoRegistro(alterado.getTipoRegistro());
-            registroPonto.setHoraBatida(alterado.getHoraBatida());
+            registroPonto.setHoraPonto(alterado.getHoraPonto());
             return repository.save(registroPonto);
         }
         return null;

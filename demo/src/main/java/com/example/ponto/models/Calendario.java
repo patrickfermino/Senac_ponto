@@ -1,32 +1,17 @@
 package com.example.ponto.models;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
-public class Calendario {
+public class Calendario extends EntityId {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "Data", nullable = false)
+    @Column
     private LocalDate data;
-
-    @Column(name = "Feriado", nullable = false)
+    @Column
     private boolean feriado;
-
-    @Column(name = "Final_De_Semana", nullable = false)
+    @Column
     private boolean finalDeSemana;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public LocalDate getData() {
         return data;

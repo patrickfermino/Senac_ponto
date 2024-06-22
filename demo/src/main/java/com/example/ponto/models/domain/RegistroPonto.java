@@ -10,8 +10,8 @@ public class RegistroPonto extends EntityId {
 
     @Column(name = "hora_ponto", nullable = false)
     private LocalDateTime horaPonto;
-    //@Column(name = "tipo_registro", nullable = false)
-    //private TipoRegistro tipoRegistro;
+    @Column(name = "tipo_registro", nullable = false)
+    private TipoRegistro tipoRegistro;
 
     public LocalDateTime getHoraPonto() {
         return horaPonto;
@@ -21,11 +21,19 @@ public class RegistroPonto extends EntityId {
         this.horaPonto = horaBatida;
     }
 
+    public TipoRegistro getTipoRegistro() {
+        return tipoRegistro;
+    }
+
+    public void setTipoRegistro(TipoRegistro tipoRegistro) {
+        this.tipoRegistro = tipoRegistro;
+    }
+
     @Override
     public String toString() {
         return "RegistroPonto{" +
-                "id=" +
-                ", horaBatida=" + horaPonto +
+                "horaPonto=" + horaPonto +
+                ", tipoRegistro=" + tipoRegistro +
                 '}';
     }
 }

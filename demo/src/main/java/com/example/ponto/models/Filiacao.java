@@ -1,13 +1,18 @@
 package com.example.ponto.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Filiacao extends EntityId {
 
+    @Column
     private String nomeMae;
+    @Column
     private String nomePai;
+    @Column
     private String telPai;
+    @Column
     private String telMae;
 
     public String getNomeMae() {
