@@ -1,13 +1,33 @@
 package com.example.ponto.models;
 
 import com.example.ponto.models.enums.Escolaridade;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
 
+@Entity
 public class Dependente extends EntityId {
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+    @Column
     private String nomeDependentes;
+    @Column
     private Escolaridade escolaridade;
+    @Column
     private LocalDate dataNascimento;
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 
     public String getNomeDependentes() {
         return nomeDependentes;

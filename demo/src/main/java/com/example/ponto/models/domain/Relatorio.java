@@ -13,13 +13,20 @@ public class Relatorio extends EntityId {
     @OneToMany(mappedBy = "relatorios")
     @JsonIgnore
     private List<Funcionario> funcionarios;
-
-    @Column(name = "horario_trabalho")
+    @ManyToOne
     private HorarioTrabalho horarioTrabalho;
-    @Column(name = "registro_ponto")
+    @ManyToOne
     private RegistroPonto registroPonto;
+    @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
+
+    public Relatorio(List<Funcionario> funcionarios, HorarioTrabalho horarioTrabalho, RegistroPonto registroPonto, Funcionario funcionario) {
+        this.funcionarios = funcionarios;
+        this.horarioTrabalho = horarioTrabalho;
+        this.registroPonto = registroPonto;
+        this.funcionario = funcionario;
+    }
 
     public HorarioTrabalho getHorarioTrabalho() {
         return horarioTrabalho;

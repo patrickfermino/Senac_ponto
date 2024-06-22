@@ -1,12 +1,15 @@
 package com.example.ponto.models;
 
 import com.example.ponto.models.enums.NivelPermissao;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Permissoes {
+public class Permissoes extends EntityId {
 
+    @Column
     private Funcionario funcionario;
+    @Column
     private NivelPermissao nivelPermissao;
 
     public Funcionario getFuncionario() {
@@ -33,4 +36,3 @@ public class Permissoes {
                 '}';
     }
 }
-// falta a validação das horas trabalhadas
