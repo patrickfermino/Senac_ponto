@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/registroponto")
-public class RegistroPontoController {
+public class RegistroPontoController extends AbstractController{
     @Autowired
     private RegistroPontoService service;
 

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/horariotrabalho")
-public class HorarioTrabalhoController {
+public class HorarioTrabalhoController extends AbstractController {
 
     private final HorarioTrabalhoService service;
 
