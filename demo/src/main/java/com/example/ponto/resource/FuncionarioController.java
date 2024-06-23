@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/funcionarios")
-public class FuncionarioController {
+public class FuncionarioController extends AbstractController {
 
     @Autowired
     private FuncionarioService service;
