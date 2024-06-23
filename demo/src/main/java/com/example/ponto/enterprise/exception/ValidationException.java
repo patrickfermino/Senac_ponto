@@ -1,4 +1,4 @@
-package com.example.ponto.enterprise;
+package com.example.ponto.enterprise.exception;
 
 public class ValidationException extends RuntimeException{
 
