@@ -128,8 +128,20 @@ public class Funcionario extends EntityId {
   @JoinColumn(name = "relatorio_id")
   private Relatorio relatorio;
 
-  @ManyToOne
-  private Relatorio relatorios;
+  @OneToMany(mappedBy = "funcionario")
+  private List<Permissoes> permissoes;
+
+  public void setRelatorio(Relatorio relatorio) {
+    this.relatorio = relatorio;
+  }
+
+  public List<Permissoes> getPermissoes() {
+    return permissoes;
+  }
+
+  public void setPermissoes(List<Permissoes> permissoes) {
+    this.permissoes = permissoes;
+  }
 
   public String getNome() {
     return nome;
@@ -471,6 +483,8 @@ public class Funcionario extends EntityId {
             ", horaExtra=" + horaExtra +
             ", horaEntrada=" + horaEntrada +
             ", horaSaida=" + horaSaida +
+            ", relatorio=" + relatorio +
+            ", permissoes=" + permissoes +
             '}';
   }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Relatorio extends EntityId {
 
-    @OneToMany(mappedBy = "relatorios")
+    @OneToMany(mappedBy = "relatorio")
     @JsonIgnore
     private List<Funcionario> funcionarios;
     @ManyToOne

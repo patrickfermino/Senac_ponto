@@ -3,11 +3,14 @@ package com.example.ponto.models;
 import com.example.ponto.models.enums.NivelPermissao;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Permissoes extends EntityId {
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
     @Column
     private NivelPermissao nivelPermissao;
