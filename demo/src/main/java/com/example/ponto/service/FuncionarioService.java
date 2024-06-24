@@ -1,10 +1,14 @@
 package com.example.ponto.service;
 
+import com.example.ponto.enterprise.exception.NotFoundException;
 import com.example.ponto.models.Funcionario;
+import com.example.ponto.models.domain.HorarioTrabalho;
 import com.example.ponto.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,19 +16,25 @@ import java.util.Optional;
 public class FuncionarioService {
 
     @Autowired
-    private FuncionarioRepository repository;
+    private FuncionarioRepository funcionariorepository;
 
     public Funcionario salvar (Funcionario entity){
-        return repository.save(entity);
+        return funcionariorepository.save(entity);
     }
-    public List<Funcionario> buscarTodos(){
-        return repository.findAll();
+    public Page<Funcionario> buscaTodos(Pageable pageable) {
+        var list = funcionariorepository.findAll(pageable);
+
+        if (list.isEmpty()){
+            throw new NotFoundException("Nenhum funcionario encontrado");
+        }
+
+        return list;
     }
     public Funcionario buscarPorId(Long id) {
-        return repository.findById(id).orElse(null);
+        return funcionariorepository.findById(id).orElse(null);
     }
     public Funcionario alterar(Long id, Funcionario alterado){
-        Optional<Funcionario> encontrado = repository.findById(id);
+        Optional<Funcionario> encontrado = funcionariorepository.findById(id);
         if (encontrado.isPresent()){
             Funcionario funcionario = encontrado.get();
             funcionario.setNome(alterado.getNome());
@@ -51,9 +61,9 @@ public class FuncionarioService {
             funcionario.setEstadoCivil(alterado.getEstadoCivil());
             funcionario.setGenero(alterado.getGenero());
             funcionario.setModalidadeContratual(alterado.getModalidadeContratual());
-            return repository.save(funcionario);
+            return funcionariorepository.save(funcionario);
         }
         return null;
     }
-    public void remover(Long id) { repository.deleteById(id);}
+    public void remover(Long id) { funcionariorepository.deleteById(id);}
 }

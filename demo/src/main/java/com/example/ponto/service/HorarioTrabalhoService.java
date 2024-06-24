@@ -1,10 +1,15 @@
 package com.example.ponto.service;
 
+import com.example.ponto.enterprise.exception.NotFoundException;
 import com.example.ponto.models.domain.HorarioTrabalho;
 import com.example.ponto.repository.HorarioTrabalhoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 import java.time.Duration;
 import java.util.List;
@@ -13,26 +18,32 @@ import java.util.Optional;
 @Service
 public class HorarioTrabalhoService {
 
-    private final HorarioTrabalhoRepository repository;
+    private final HorarioTrabalhoRepository horarioTrabalhorepository;
 
     @Autowired
     public HorarioTrabalhoService(HorarioTrabalhoRepository repository) {
-        this.repository = repository;
+        this.horarioTrabalhorepository = repository;
     }
 
     public HorarioTrabalho salvar(HorarioTrabalho entity) {
-        return repository.save(entity);
+        return horarioTrabalhorepository.save(entity);
     }
 
-    public List<HorarioTrabalho> buscaTodos() {
-        return repository.findAll();
+    public Page<HorarioTrabalho> buscaTodos(Pageable pageable) {
+        var list = horarioTrabalhorepository.findAll(pageable);
+
+        if (list.isEmpty()){
+            throw new NotFoundException("Nenhum Horario de trabalho encontrado");
+        }
+
+        return list;
     }
 
     public Optional<HorarioTrabalho> buscaPorId(Long id) {
-        return repository.findById(id);
+        return horarioTrabalhorepository.findById(id);
     }
     public long calcularHorasTrabalhadas(Long id) {
-        HorarioTrabalho horarioTrabalho = repository.findById(id).orElse(null);
+        HorarioTrabalho horarioTrabalho = horarioTrabalhorepository.findById(id).orElse(null);
         if (horarioTrabalho != null && horarioTrabalho.getHoraEntrada() != null && horarioTrabalho.getHoraSaida() != null) {
             // Calcula a duração entre a hora de entrada e a hora de saída
             Duration duracaoTrabalho = Duration.between(horarioTrabalho.getHoraEntrada(), horarioTrabalho.getHoraSaida());
@@ -65,19 +76,19 @@ public class HorarioTrabalhoService {
 
     @Transactional
     public HorarioTrabalho alterar(Long id, HorarioTrabalho alterado) {
-        return repository.findById(id)
+        return horarioTrabalhorepository.findById(id)
                 .map(horarioTrabalho -> {
                     horarioTrabalho.setHoraEntrada(alterado.getHoraEntrada());
                     horarioTrabalho.setHoraSaida(alterado.getHoraSaida());
                     horarioTrabalho.setHoraIntervalo(alterado.getHoraIntervalo());
                     horarioTrabalho.setDiasTrabalhados(alterado.getDiasTrabalhados());
-                    return repository.save(horarioTrabalho);
+                    return horarioTrabalhorepository.save(horarioTrabalho);
                 })
                 .orElseThrow(() -> new RuntimeException("Horário de trabalho não encontrado"));
     }
 
     public void remover(Long id) {
-        repository.deleteById(id);
+        horarioTrabalhorepository.deleteById(id);
     }
 }
 
