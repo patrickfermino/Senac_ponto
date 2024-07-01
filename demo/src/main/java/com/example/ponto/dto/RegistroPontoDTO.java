@@ -34,6 +34,19 @@ public class RegistroPontoDTO {
         this.tipoRegistro = tipoRegistro;
     }
 
+    public static RegistroPontoDTO fromEntity(RegistroPonto entity) {
+        return new RegistroPontoDTO(
+                entity.getHoraPonto(),
+                entity.getTipoRegistro()
+        );
+    }
+
+    public RegistroPonto toEntity() {
+        RegistroPonto entity = new RegistroPonto();
+        entity.setHoraPonto(this.horaPonto);
+        entity.setTipoRegistro(this.tipoRegistro);
+        return entity;
+    }
 
     @Override
     public String toString() {
