@@ -1,53 +1,48 @@
-
 package com.example.ponto.service;
 
-import com.example.ponto.enterprise.exception.NotFoundException;
+import com.example.ponto.dto.RegistroPontoDTO;
 import com.example.ponto.models.domain.RegistroPonto;
 import com.example.ponto.repository.RegistroPontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class RegistroPontoService {
 
-    private final RegistroPontoRepository registroPontoRepositoryrepository;
-
     @Autowired
-    public RegistroPontoService(RegistroPontoRepository repository) {
-        this.registroPontoRepositoryrepository = repository;
+    private RegistroPontoRepository registroPontoRepository;
+
+    public Page<RegistroPonto> listarRegistrosPonto(Pageable pageable) {
+        return registroPontoRepository.findAll(pageable);
     }
 
-    public RegistroPonto salvar (RegistroPonto entity){
-        return registroPontoRepositoryrepository.save(entity);
+    public RegistroPontoDTO buscarRegistroPontoPorId(Long id) {
+        Optional<RegistroPonto> optionalRegistroPonto = registroPontoRepository.findById(id);
+        return optionalRegistroPonto.map(RegistroPontoDTO::fromEntity).orElse(null);
     }
-    public  Page<RegistroPonto> buscaTodos(Pageable pageable) {
-        var list = registroPontoRepositoryrepository.findAll(pageable);
 
-        if (list.isEmpty()){
-            throw new NotFoundException("Nenhum registro de ponto encontrado");
-        }
+    public RegistroPontoDTO adicionarRegistroPonto(RegistroPontoDTO registroPontoDTO) {
+        RegistroPonto registroPonto = registroPontoDTO.toEntity();
+        RegistroPonto registroPontoSalvo = registroPontoRepository.save(registroPonto);
+        return RegistroPontoDTO.fromEntity(registroPontoSalvo);
+    }
 
-        return list;
-    }
-    public RegistroPonto buscaPorId(Long id) {
-        return registroPontoRepositoryrepository.findById(id).orElse(null);
-    }
-    public RegistroPonto alterar(Long id, RegistroPonto alterado){
-        Optional<RegistroPonto> encontrado = registroPontoRepositoryrepository.findById(id);
-        if (encontrado.isPresent()){
-            RegistroPonto registroPonto = encontrado.get();
-            registroPonto.setTipoRegistro(alterado.getTipoRegistro());
-            registroPonto.setHoraPonto(alterado.getHoraPonto());
-            return registroPontoRepositoryrepository.save(registroPonto);
+    public RegistroPontoDTO atualizarRegistroPonto(Long id, RegistroPontoDTO registroPontoDTO) {
+        Optional<RegistroPonto> optionalRegistroPonto = registroPontoRepository.findById(id);
+        if (optionalRegistroPonto.isPresent()) {
+            RegistroPonto registroPonto = registroPontoDTO.toEntity();
+            registroPonto.setId(id);
+            RegistroPonto registroPontoAtualizado = registroPontoRepository.save(registroPonto);
+            return RegistroPontoDTO.fromEntity(registroPontoAtualizado);
         }
         return null;
     }
-    public void remover(Long id) { registroPontoRepositoryrepository.deleteById(id);}
-}
 
+    public void deletarRegistroPonto(Long id) {
+        registroPontoRepository.deleteById(id);
+    }
+}

@@ -7,15 +7,22 @@ import java.time.LocalDateTime;
 
 public class RegistroPontoDTO {
 
+    private Long id;
     private LocalDateTime horaPonto;
     private TipoRegistro tipoRegistro;
 
-    public RegistroPontoDTO() {
-    }
-
-    public RegistroPontoDTO(LocalDateTime horaPonto, TipoRegistro tipoRegistro) {
+    public RegistroPontoDTO(Long id, LocalDateTime horaPonto, TipoRegistro tipoRegistro) {
+        this.id = id;
         this.horaPonto = horaPonto;
         this.tipoRegistro = tipoRegistro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getHoraPonto() {
@@ -36,6 +43,7 @@ public class RegistroPontoDTO {
 
     public static RegistroPontoDTO fromEntity(RegistroPonto entity) {
         return new RegistroPontoDTO(
+                entity.getId(),
                 entity.getHoraPonto(),
                 entity.getTipoRegistro()
         );
@@ -43,6 +51,7 @@ public class RegistroPontoDTO {
 
     public RegistroPonto toEntity() {
         RegistroPonto entity = new RegistroPonto();
+        entity.setId(this.id);
         entity.setHoraPonto(this.horaPonto);
         entity.setTipoRegistro(this.tipoRegistro);
         return entity;
@@ -51,7 +60,8 @@ public class RegistroPontoDTO {
     @Override
     public String toString() {
         return "RegistroPontoDTO{" +
-                "horaPonto=" + horaPonto +
+                "id=" + id +
+                ", horaPonto=" + horaPonto +
                 ", tipoRegistro=" + tipoRegistro +
                 '}';
     }

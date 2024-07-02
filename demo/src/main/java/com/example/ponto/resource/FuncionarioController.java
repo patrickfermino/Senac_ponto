@@ -1,16 +1,12 @@
 package com.example.ponto.resource;
 
-import com.example.ponto.models.Funcionario;
-import com.example.ponto.models.domain.HorarioTrabalho;
+import com.example.ponto.dto.FuncionarioDTO;
 import com.example.ponto.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -18,24 +14,17 @@ import java.util.List;
 public class FuncionarioController extends AbstractController {
 
     @Autowired
-    private FuncionarioService funcionarioservice;
-
-    @PostMapping
-    public ResponseEntity<Funcionario> create(@RequestBody Funcionario funcionario) {
-        Funcionario savedFuncionario = funcionarioservice.salvar(funcionario);
-        return ResponseEntity.created(URI.create("/api/funcionarios/" + savedFuncionario.getId())).body(savedFuncionario);
-    }
+    private FuncionarioService funcionarioService;
 
     @GetMapping
-    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Funcionario> funcionario = funcionarioservice.buscaTodos(pageable);
-        return ResponseEntity.ok(funcionario);
+    public ResponseEntity<List<FuncionarioDTO>> listarFuncionarios() {
+        List<FuncionarioDTO> funcionarios = funcionarioService.listarFuncionarios();
+        return ResponseEntity.ok(funcionarios);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Funcionario> findById(@PathVariable("id") Long id) {
-        Funcionario funcionario = funcionarioservice.buscarPorId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> buscarFuncionarioPorId(@PathVariable Long id) {
+        FuncionarioDTO funcionario = funcionarioService.buscarFuncionarioPorId(id);
         if (funcionario != null) {
             return ResponseEntity.ok(funcionario);
         } else {
@@ -43,17 +32,27 @@ public class FuncionarioController extends AbstractController {
         }
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> remove(@PathVariable("id") Long id) {
-        funcionarioservice.remover(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping
+    public ResponseEntity<FuncionarioDTO> adicionarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO novoFuncionario = funcionarioService.adicionarFuncionario(funcionarioDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoFuncionario);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Funcionario> update(@PathVariable("id") Long id, @RequestBody Funcionario funcionario) {
-        Funcionario funcionarioAtualizado = funcionarioservice.alterar(id, funcionario);
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioDTO> atualizarFuncionario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
+        FuncionarioDTO funcionarioAtualizado = funcionarioService.atualizarFuncionario(id, funcionarioDTO);
         if (funcionarioAtualizado != null) {
             return ResponseEntity.ok(funcionarioAtualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarFuncionario(@PathVariable Long id) {
+        boolean deleted = funcionarioService.deletarFuncionario(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

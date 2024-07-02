@@ -1,6 +1,7 @@
 package com.example.ponto.models.domain;
 
 import com.example.ponto.models.EntityId;
+import com.example.ponto.models.Funcionario;
 import com.example.ponto.models.enums.TipoRegistro;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,28 @@ public class RegistroPonto extends EntityId {
     private LocalDateTime horaPonto;
     @Column(name = "tipo_registro", nullable = false)
     private TipoRegistro tipoRegistro;
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
+    @ManyToOne
+    @JoinColumn(name = "relatorio_id")
+    private Relatorio relatorio;
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Relatorio getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(Relatorio relatorio) {
+        this.relatorio = relatorio;
+    }
 
     public LocalDateTime getHoraPonto() {
         return horaPonto;
@@ -34,6 +57,8 @@ public class RegistroPonto extends EntityId {
         return "RegistroPonto{" +
                 "horaPonto=" + horaPonto +
                 ", tipoRegistro=" + tipoRegistro +
+                ", funcionario=" + funcionario +
+                ", relatorio=" + relatorio +
                 '}';
     }
 }

@@ -1,50 +1,65 @@
 package com.example.ponto.resource;
+
+import com.example.ponto.dto.RegistroPontoDTO;
 import com.example.ponto.models.domain.RegistroPonto;
 import com.example.ponto.service.RegistroPontoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/registroponto")
-public class RegistroPontoController extends AbstractController{
+public class RegistroPontoController extends AbstractController {
+
     @Autowired
-    private RegistroPontoService registroPontoservice;
+    private RegistroPontoService registroPontoService;
+
+    @GetMapping
+    public ResponseEntity<Page<RegistroPontoDTO>> listarRegistrosPonto(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<RegistroPonto> registros = registroPontoService.listarRegistrosPonto(pageable);
+        Page<RegistroPontoDTO> dtos = registros.map(RegistroPontoDTO::fromEntity);
+        return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RegistroPontoDTO> buscarRegistroPontoPorId(@PathVariable Long id) {
+        RegistroPontoDTO registroPonto = registroPontoService.buscarRegistroPontoPorId(id);
+        if (registroPonto != null) {
+            return ResponseEntity.ok(registroPonto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody RegistroPonto entity) {
-        RegistroPonto savedEntity = registroPontoservice.salvar(entity);
-        URI uri = URI.create("/api/registroponto" + savedEntity.getId());
-        return ResponseEntity.created(uri).body(savedEntity);
+    public ResponseEntity<RegistroPontoDTO> adicionarRegistroPonto(@RequestBody RegistroPontoDTO registroPontoDTO) {
+        RegistroPontoDTO novoRegistroPonto = registroPontoService.adicionarRegistroPonto(registroPontoDTO);
+        URI uri = URI.create("/api/registroponto/" + novoRegistroPonto.getId());
+        return ResponseEntity.created(uri).body(novoRegistroPonto);
     }
-    @GetMapping
-    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "1") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<RegistroPonto> registroPonto = registroPontoservice.buscaTodos(pageable);
-        return ResponseEntity.ok(registroPonto);
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RegistroPontoDTO> atualizarRegistroPonto(@PathVariable Long id, @RequestBody RegistroPontoDTO registroPontoDTO) {
+        registroPontoDTO.setId(id);
+        RegistroPontoDTO registroPontoAtualizado = registroPontoService.atualizarRegistroPonto(id, registroPontoDTO);
+        if (registroPontoAtualizado != null) {
+            return ResponseEntity.ok(registroPontoAtualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    @GetMapping("{id}")
-    public ResponseEntity findById(@PathVariable("id") Long id) {
-        RegistroPonto registroponto = registroPontoservice.buscaPorId(id);
-        return ResponseEntity.ok(registroponto);
-    }
-    @DeleteMapping("{id}")
-    public ResponseEntity remove(@PathVariable("id") Long id) {
-        registroPontoservice.remover(id);
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarRegistroPonto(@PathVariable Long id) {
+        registroPontoService.deletarRegistroPonto(id);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody RegistroPonto entity) {
-        RegistroPonto alterado = registroPontoservice.alterar(id, entity);
-        return ResponseEntity.ok().body(alterado);
-    }
 }
-
-
-

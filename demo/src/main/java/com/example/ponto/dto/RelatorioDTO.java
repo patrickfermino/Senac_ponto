@@ -1,29 +1,29 @@
 package com.example.ponto.dto;
 
-import com.example.ponto.models.Funcionario;
-import com.example.ponto.models.domain.Relatorio;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RelatorioDTO {
 
-    private FuncionarioDTO funcionario;
+    private List<FuncionarioDTO> funcionarios;
     private HorarioTrabalhoDTO horarioTrabalho;
-    private RegistroPontoDTO registroPonto;
+    private List<RegistroPontoDTO> registrosPonto;
 
     public RelatorioDTO() {
     }
 
-    public RelatorioDTO(FuncionarioDTO funcionario, HorarioTrabalhoDTO horarioTrabalho, RegistroPontoDTO registroPonto) {
-        this.funcionario = funcionario;
+    public RelatorioDTO(List<FuncionarioDTO> funcionarios, HorarioTrabalhoDTO horarioTrabalho, List<RegistroPontoDTO> registrosPonto) {
+        this.funcionarios = funcionarios;
         this.horarioTrabalho = horarioTrabalho;
-        this.registroPonto = registroPonto;
+        this.registrosPonto = registrosPonto;
     }
 
-    public FuncionarioDTO getFuncionario() {
-        return funcionario;
+    public List<FuncionarioDTO> getFuncionarios() {
+        return funcionarios;
     }
 
-    public void setFuncionario(FuncionarioDTO funcionario) {
-        this.funcionario = funcionario;
+    public void setFuncionarios(List<FuncionarioDTO> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     public HorarioTrabalhoDTO getHorarioTrabalho() {
@@ -34,19 +34,36 @@ public class RelatorioDTO {
         this.horarioTrabalho = horarioTrabalho;
     }
 
-    public RegistroPontoDTO getRegistroPonto() {
-        return registroPonto;
+    public List<RegistroPontoDTO> getRegistrosPonto() {
+        return registrosPonto;
     }
 
-    public void setRegistroPonto(RegistroPontoDTO registroPonto) {
-        this.registroPonto = registroPonto;
+    public void setRegistrosPonto(List<RegistroPontoDTO> registrosPonto) {
+        this.registrosPonto = registrosPonto;
     }
 
-    public static RelatorioDTO fromEntity(Relatorio entity) {
+    public static RelatorioDTO fromEntity(com.example.ponto.models.domain.Relatorio entity) {
+        List<FuncionarioDTO> funcionariosDTO = entity.getFuncionarios().stream()
+                .map(FuncionarioDTO::fromEntity)
+                .collect(Collectors.toList());
+
+        List<RegistroPontoDTO> registrosPontoDTO = entity.getRegistrosPonto().stream()
+                .map(RegistroPontoDTO::fromEntity)
+                .collect(Collectors.toList());
+
         return new RelatorioDTO(
-                FuncionarioDTO.fromEntity(entity.getFuncionario()),
+                funcionariosDTO,
                 HorarioTrabalhoDTO.fromEntity(entity.getHorarioTrabalho()),
-                RegistroPontoDTO.fromEntity(entity.getRegistroPonto())
+                registrosPontoDTO
         );
+    }
+
+    @Override
+    public String toString() {
+        return "RelatorioDTO{" +
+                "funcionarios=" + funcionarios +
+                ", horarioTrabalho=" + horarioTrabalho +
+                ", registrosPonto=" + registrosPonto +
+                '}';
     }
 }

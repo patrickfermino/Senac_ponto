@@ -1,5 +1,6 @@
 package com.example.ponto.models;
 
+import com.example.ponto.models.domain.RegistroPonto;
 import com.example.ponto.models.domain.Relatorio;
 import com.example.ponto.models.enums.*;
 import jakarta.persistence.*;
@@ -130,6 +131,17 @@ public class Funcionario extends EntityId {
 
   @OneToMany(mappedBy = "funcionario")
   private List<Permissoes> permissoes;
+
+  @OneToMany(mappedBy = "funcionario")
+  private List<RegistroPonto> registrosPonto;
+
+  public List<RegistroPonto> getRegistrosPonto() {
+    return registrosPonto;
+  }
+
+  public void setRegistrosPonto(List<RegistroPonto> registrosPonto) {
+    this.registrosPonto = registrosPonto;
+  }
 
   public void setRelatorio(Relatorio relatorio) {
     this.relatorio = relatorio;

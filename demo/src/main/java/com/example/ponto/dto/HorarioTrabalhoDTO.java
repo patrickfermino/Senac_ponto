@@ -1,6 +1,7 @@
 package com.example.ponto.dto;
 
 import com.example.ponto.models.domain.HorarioTrabalho;
+
 import java.time.LocalTime;
 
 public class HorarioTrabalhoDTO {
@@ -80,5 +81,16 @@ public class HorarioTrabalhoDTO {
         entity.setHoraIntervalo(this.horaIntervalo);
         entity.setDiasTrabalhados(this.diasTrabalhados);
         return entity;
+    }
+
+    @Override
+    public String toString() {
+        return "HorarioTrabalhoDTO{" +
+                "id=" + id +
+                ", horaEntrada=" + horaEntrada +
+                ", horaSaida=" + horaSaida +
+                ", horaIntervalo=" + horaIntervalo +
+                ", diasTrabalhados='" + diasTrabalhados + '\'' +
+                '}';
     }
 }

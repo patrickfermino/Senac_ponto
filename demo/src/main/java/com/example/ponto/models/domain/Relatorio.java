@@ -2,30 +2,40 @@ package com.example.ponto.models.domain;
 
 import com.example.ponto.models.EntityId;
 import com.example.ponto.models.Funcionario;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
 public class Relatorio extends EntityId {
 
-    @OneToMany(mappedBy = "relatorio")
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "relatorio_funcionarios",
+            joinColumns = @JoinColumn(name = "relatorio_id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id"))
     private List<Funcionario> funcionarios;
-    @ManyToOne
-    private HorarioTrabalho horarioTrabalho;
-    @ManyToOne
-    private RegistroPonto registroPonto;
-    @ManyToOne
-    @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
 
-    public Relatorio(List<Funcionario> funcionarios, HorarioTrabalho horarioTrabalho, RegistroPonto registroPonto, Funcionario funcionario) {
+    @ManyToOne
+    @JoinColumn(name = "horario_trabalho_id")
+    private HorarioTrabalho horarioTrabalho;
+
+    @OneToMany(mappedBy = "relatorio")
+    private List<RegistroPonto> registrosPonto;
+
+    public Relatorio() {
+    }
+
+    public Relatorio(List<Funcionario> funcionarios, HorarioTrabalho horarioTrabalho, List<RegistroPonto> registrosPonto) {
         this.funcionarios = funcionarios;
         this.horarioTrabalho = horarioTrabalho;
-        this.registroPonto = registroPonto;
-        this.funcionario = funcionario;
+        this.registrosPonto = registrosPonto;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     public HorarioTrabalho getHorarioTrabalho() {
@@ -36,28 +46,20 @@ public class Relatorio extends EntityId {
         this.horarioTrabalho = horarioTrabalho;
     }
 
-    public RegistroPonto getRegistroPonto() {
-        return registroPonto;
+    public List<RegistroPonto> getRegistrosPonto() {
+        return registrosPonto;
     }
 
-    public void setRegistroPonto(RegistroPonto registroPonto) {
-        this.registroPonto = registroPonto;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setRegistrosPonto(List<RegistroPonto> registrosPonto) {
+        this.registrosPonto = registrosPonto;
     }
 
     @Override
     public String toString() {
         return "Relatorio{" +
-                "horarioTrabalho=" + horarioTrabalho +
-                ", registroPonto=" + registroPonto +
-                ", funcionario=" + funcionario +
+                "funcionarios=" + funcionarios +
+                ", horarioTrabalho=" + horarioTrabalho +
+                ", registrosPonto=" + registrosPonto +
                 '}';
     }
 }
