@@ -72,13 +72,13 @@ public class FuncionarioDTO {
         );
     }
 
-    public Funcionario toEntity() {
+    public static Funcionario toEntity(FuncionarioDTO funcionarioDTO) {
         Funcionario entity = new Funcionario();
-        entity.setId(this.id);
-        entity.setNome(this.nome);
-        entity.setCpf(this.cpf);
-        entity.setEmail(this.email);
-        entity.setDataAdmissao(this.dataAdmissao);
+        entity.setId(funcionarioDTO.getId());
+        entity.setNome(funcionarioDTO.getNome());
+        entity.setCpf(funcionarioDTO.getCpf());
+        entity.setEmail(funcionarioDTO.getEmail());
+        entity.setDataAdmissao(funcionarioDTO.getDataAdmissao());
         return entity;
     }
 

@@ -29,7 +29,7 @@ public class FuncionarioService {
     }
 
     public FuncionarioDTO adicionarFuncionario(FuncionarioDTO funcionarioDTO) {
-        Funcionario funcionario = funcionarioDTO.toEntity();
+        Funcionario funcionario = funcionarioDTO.toEntity(funcionarioDTO);
         Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
         return FuncionarioDTO.fromEntity(funcionarioSalvo);
     }
@@ -37,7 +37,7 @@ public class FuncionarioService {
     public FuncionarioDTO atualizarFuncionario(Long id, FuncionarioDTO funcionarioDTO) {
         Optional<Funcionario> optionalFuncionario = funcionarioRepository.findById(id);
         if (optionalFuncionario.isPresent()) {
-            Funcionario funcionario = funcionarioDTO.toEntity();
+            Funcionario funcionario = funcionarioDTO.toEntity(funcionarioDTO);
             funcionario.setId(id);
             Funcionario funcionarioAtualizado = funcionarioRepository.save(funcionario);
             return FuncionarioDTO.fromEntity(funcionarioAtualizado);

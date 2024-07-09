@@ -1,5 +1,6 @@
 package com.example.ponto.dto;
 
+import com.example.ponto.models.Funcionario;
 import com.example.ponto.models.domain.RegistroPonto;
 import com.example.ponto.models.enums.TipoRegistro;
 
@@ -10,11 +11,21 @@ public class RegistroPontoDTO {
     private Long id;
     private LocalDateTime horaPonto;
     private TipoRegistro tipoRegistro;
+    private FuncionarioDTO funcionarioDTO;
 
-    public RegistroPontoDTO(Long id, LocalDateTime horaPonto, TipoRegistro tipoRegistro) {
+    public RegistroPontoDTO(Long id, LocalDateTime horaPonto, TipoRegistro tipoRegistro, FuncionarioDTO funcionarioDTO) {
         this.id = id;
         this.horaPonto = horaPonto;
         this.tipoRegistro = tipoRegistro;
+        this.funcionarioDTO = funcionarioDTO;
+    }
+
+    public FuncionarioDTO getFuncionarioDTO() {
+        return funcionarioDTO;
+    }
+
+    public void setFuncionarioDTO(FuncionarioDTO funcionarioDTO) {
+        this.funcionarioDTO = funcionarioDTO;
     }
 
     public Long getId() {
@@ -45,7 +56,8 @@ public class RegistroPontoDTO {
         return new RegistroPontoDTO(
                 entity.getId(),
                 entity.getHoraPonto(),
-                entity.getTipoRegistro()
+                entity.getTipoRegistro(),
+                FuncionarioDTO.fromEntity(entity.getFuncionario())
         );
     }
 
@@ -54,15 +66,7 @@ public class RegistroPontoDTO {
         entity.setId(this.id);
         entity.setHoraPonto(this.horaPonto);
         entity.setTipoRegistro(this.tipoRegistro);
+        entity.setFuncionario(FuncionarioDTO.toEntity(this.funcionarioDTO));
         return entity;
-    }
-
-    @Override
-    public String toString() {
-        return "RegistroPontoDTO{" +
-                "id=" + id +
-                ", horaPonto=" + horaPonto +
-                ", tipoRegistro=" + tipoRegistro +
-                '}';
     }
 }
