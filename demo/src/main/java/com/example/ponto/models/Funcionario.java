@@ -1,10 +1,9 @@
 package com.example.ponto.models;
 
 import com.example.ponto.models.domain.RegistroPonto;
-import com.example.ponto.models.domain.Relatorio;
 import com.example.ponto.models.enums.*;
 import jakarta.persistence.*;
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -125,10 +124,6 @@ public class Funcionario extends EntityId {
   @Column
   private LocalTime horaSaida;
 
-  @ManyToOne
-  @JoinColumn(name = "relatorio_id")
-  private Relatorio relatorio;
-
   @OneToMany(mappedBy = "funcionario")
   private List<Permissoes> permissoes;
 
@@ -143,9 +138,6 @@ public class Funcionario extends EntityId {
     this.registrosPonto = registrosPonto;
   }
 
-  public void setRelatorio(Relatorio relatorio) {
-    this.relatorio = relatorio;
-  }
 
   public List<Permissoes> getPermissoes() {
     return permissoes;
@@ -451,10 +443,6 @@ public class Funcionario extends EntityId {
     this.horaSaida = horaSaida;
   }
 
-  public Relatorio getRelatorio() {
-    return relatorio;
-  }
-
   @Override
   public String toString() {
     return "Funcionario{" +
@@ -495,7 +483,6 @@ public class Funcionario extends EntityId {
             ", horaExtra=" + horaExtra +
             ", horaEntrada=" + horaEntrada +
             ", horaSaida=" + horaSaida +
-            ", relatorio=" + relatorio +
             ", permissoes=" + permissoes +
             '}';
   }

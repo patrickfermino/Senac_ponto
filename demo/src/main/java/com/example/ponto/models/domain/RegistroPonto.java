@@ -9,16 +9,18 @@ import java.time.LocalDateTime;
 @Entity
 public class RegistroPonto extends EntityId {
 
+    @Column(name = "data_hora")
+    private LocalDateTime dataHora;
     @Column(name = "hora_ponto", nullable = false)
     private LocalDateTime horaPonto;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_registro", nullable = false)
     private TipoRegistro tipoRegistro;
+
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
-    @ManyToOne
-    @JoinColumn(name = "relatorio_id")
-    private Relatorio relatorio;
 
     public Funcionario getFuncionario() {
         return funcionario;
@@ -26,14 +28,6 @@ public class RegistroPonto extends EntityId {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    public Relatorio getRelatorio() {
-        return relatorio;
-    }
-
-    public void setRelatorio(Relatorio relatorio) {
-        this.relatorio = relatorio;
     }
 
     public LocalDateTime getHoraPonto() {
@@ -58,7 +52,6 @@ public class RegistroPonto extends EntityId {
                 "horaPonto=" + horaPonto +
                 ", tipoRegistro=" + tipoRegistro +
                 ", funcionario=" + funcionario +
-                ", relatorio=" + relatorio +
                 '}';
     }
 }
